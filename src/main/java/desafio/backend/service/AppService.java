@@ -129,6 +129,29 @@ public class AppService {
         return relatorioEntrada;
     }
     
+    public RelatorioSaida processaRelatoriosEntrada(List<RelatorioEntrada> entradas) {
+/*
+        Quantidade de clientes no arquivo de entrada
+        Quantidade de vendedor no arquivo de entrada
+        ID da venda mais cara
+        O pior vendedor
+        O sistema deve estar funcionando o tempo todo.
+        Todos os arquivos novos estar disponível, tudo deve ser executado
+        Seu código deve ser escrito em Java.
+        Você tem total liberdade para utilizar google com o que você precisa. Sinta-se à vontade para escolher qualquer biblioteca externa se for necessário.
+         */
+
+        long quantClientes = entradas.stream()
+                .map(RelatorioEntrada::getClientes)
+                .count();
+        
+        long quantVendedores = entradas.stream()
+                .map(RelatorioEntrada::getVendedores)
+                .count();
+        
+        return null;
+    }
+    
     public void escreverSaida(RelatorioSaida relatorio) {
     }
 
