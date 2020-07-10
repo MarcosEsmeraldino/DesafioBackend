@@ -13,7 +13,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,18 +27,20 @@ import java.util.stream.Collectors;
  */
 public class AppService {
     
-    public List<RelatorioEntrada> buscarDadosEntrada(String path) {
+    public RelatorioEntrada lerEntradas(String path) {
         
         FileFilter filter = (File f) -> f.getName().endsWith(".dat");
         File dir = new File(path);
         File[] files = dir.listFiles(filter);
         
-        return Arrays.stream(files)
-                .map(this::processarArquivoEntrada)
+        List<RelatorioEntrada> todasEntradas = Arrays.stream(files)
+                .map(this::processarEntrada)
                 .collect(Collectors.toList());
+        
+        return RelatorioEntrada.agrupar(todasEntradas);
     }
     
-    public RelatorioEntrada processarArquivoEntrada(File file) {
+    public RelatorioEntrada processarEntrada(File file) {
 
         List<Vendedor> vendedores = new ArrayList();
         List<Cliente> clientes = new ArrayList();
@@ -125,31 +126,26 @@ public class AppService {
         relatorioEntrada.setClientes(clientes);
         relatorioEntrada.setVendas(vendas);
         relatorioEntrada.setVendedores(vendedores);
-        relatorioEntrada.setDataHoraProcessamento(OffsetDateTime.now());
         return relatorioEntrada;
     }
     
-    public RelatorioSaida processaRelatoriosEntrada(List<RelatorioEntrada> entradas) {
-/*
-        Quantidade de clientes no arquivo de entrada
-        Quantidade de vendedor no arquivo de entrada
-        ID da venda mais cara
-        O pior vendedor
-        O sistema deve estar funcionando o tempo todo.
-        Todos os arquivos novos estar disponível, tudo deve ser executado
-        Seu código deve ser escrito em Java.
-        Você tem total liberdade para utilizar google com o que você precisa. Sinta-se à vontade para escolher qualquer biblioteca externa se for necessário.
-         */
+    public RelatorioSaida processarSaida(RelatorioEntrada entrada) {
 
-        long quantClientes = entradas.stream()
-                .map(RelatorioEntrada::getClientes)
-                .count();
+        long quantClientes = entrada.getClientes().size();
         
-        long quantVendedores = entradas.stream()
-                .map(RelatorioEntrada::getVendedores)
-                .count();
+        long quantVendedores = entrada.getVendedores().size();
         
-        return null;
+        long vendaMaisCara = 0;
+        
+        String piorVendedor = null;
+        
+        RelatorioSaida saida = new RelatorioSaida();
+        saida.setMaiorVenda(vendaMaisCara);
+        saida.setPiorVendedor(piorVendedor);
+        saida.setQuantClientes(quantClientes);
+        saida.setQuantVendedores(quantVendedores);
+        
+        return saida;
     }
     
     public void escreverSaida(RelatorioSaida relatorio) {

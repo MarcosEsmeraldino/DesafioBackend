@@ -8,24 +8,24 @@ package desafio.backend.model;
  */
 public class RelatorioSaida {
 
-    private int quantClientes;
-    private int quantVendedores;
+    private Long quantClientes;
+    private Long quantVendedores;
     private Long maiorVenda;
     private String piorVendedor;
 
-    public int getQuantClientes() {
+    public Long getQuantClientes() {
         return quantClientes;
     }
 
-    public void setQuantClientes(int quantClientes) {
+    public void setQuantClientes(Long quantClientes) {
         this.quantClientes = quantClientes;
     }
 
-    public int getQuantVendedores() {
+    public Long getQuantVendedores() {
         return quantVendedores;
     }
 
-    public void setQuantVendedores(int quantVendedores) {
+    public void setQuantVendedores(Long quantVendedores) {
         this.quantVendedores = quantVendedores;
     }
 

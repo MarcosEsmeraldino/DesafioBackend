@@ -1,7 +1,6 @@
 
 package desafio.backend.model;
 
-import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
@@ -14,15 +13,6 @@ public class RelatorioEntrada {
     private List<Cliente> clientes;
     private List<Vendedor> vendedores;
     private List<Venda> vendas;
-    private OffsetDateTime dataHoraProcessamento;
-
-    public OffsetDateTime getDataHoraProcessamento() {
-        return dataHoraProcessamento;
-    }
-
-    public void setDataHoraProcessamento(OffsetDateTime dataHoraProcessamento) {
-        this.dataHoraProcessamento = dataHoraProcessamento;
-    }
 
     public List<Cliente> getClientes() {
         return clientes;
@@ -46,6 +36,10 @@ public class RelatorioEntrada {
 
     public void setVendas(List<Venda> vendas) {
         this.vendas = vendas;
+    }
+    
+    public static RelatorioEntrada agrupar(List<RelatorioEntrada> entradas) {
+        return null;
     }
 
 }
